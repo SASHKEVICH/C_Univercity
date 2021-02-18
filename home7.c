@@ -8,6 +8,7 @@ int main()
     char fileName[10] = "home7.txt";
 
     workWithMatrix(fileName);
+    printf("Работу выполнил Бекренев Александр. Группа 420-4.");
 
     return 0;
 }
