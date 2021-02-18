@@ -43,4 +43,5 @@ void workWithMatrix(char *name)
             printf("\n");
         }
     }
+    fclose(file);
 }
