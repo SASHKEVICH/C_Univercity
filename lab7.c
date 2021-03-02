@@ -4,7 +4,7 @@
 #include <math.h>
 #include <limits.h>
 
-typedef struct node
+typedef struct node // Определяю структуру NODE - "Звено"
 {
     int expValue;
     int multipValue;
@@ -12,6 +12,7 @@ typedef struct node
 
 } listNode;
 
+// Функция создает звено
 listNode *createNode(int setExpValue, int setMultipValue)
 {
     listNode *node = (listNode *)malloc(sizeof(listNode));
@@ -22,7 +23,7 @@ listNode *createNode(int setExpValue, int setMultipValue)
 
     return node;
 }
-
+// Функция ставит звено в конец
 void append(listNode **list, int setExpValue, int setMultipValue)
 {
     listNode *newElement = createNode(setExpValue, setMultipValue);
@@ -36,23 +37,8 @@ void append(listNode **list, int setExpValue, int setMultipValue)
     tmp->next = newElement;
 }
 
-void createFile(char *name, int k)
-{
-    int n = 40;
-    int m = 52;
-    FILE *file = fopen(name, "w");
-    if (file == NULL)
-    {
-        printf("Ошибка создания файла :(");
-        system("pause");
-        return ;
-    }
-
-    fwrite(&n, sizeof(int), 1, file);
-    fwrite(&m, sizeof(int), 1, file);
-    fclose(file);
-}
-
+/* Функция читает файл и работает с ним, представляя информацию в нем в виде
+связного списка */
 void readFileAndWorkWithNode(char *name, int x)
 {
     int result = 0;
@@ -95,17 +81,18 @@ void readFileAndWorkWithNode(char *name, int x)
         {
             printf("+ %dx^%d ", list->multipValue, list->expValue);
         }
-        result += list->multipValue * pow(x, list->expValue);
+        result += list->multipValue * powl(x, list->expValue);
         list = list->next;
     }
+    printf("result = %d", result);
     printf("\n");
     printf("\n");
 
-    if (result > INT_MAX)
+    if (result <= INT_MIN)
     {
         printf("Произошло переполнение :(\n");
         system("pause");
-        return;
+        return ;
     } else
     {
         printf("Результат умножения вашего x на этот многочлен - %d\n", result);

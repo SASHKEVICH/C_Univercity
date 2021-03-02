@@ -1,12 +1,13 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void workWithMatrix();
 void printMatrix();
+void workWithMatrix();
 
 int main()
-{  
-    char fileName[100] = "/Users/sashkevich/Программирование/С_Unversity/testFile2.txt";
+{
+    // Нужно будет прописывать польный путь до файла вместе с его расширением
+    char fileName[100] = "testFile.txt"; 
 
     printf("Оригинальная матрица: \n");
 
@@ -21,6 +22,7 @@ int main()
     return 0;
 }
 
+// Вывод основной матрицы на экран
 void printMatrix(char *name)
 {
     FILE *file = fopen(name, "rt");
