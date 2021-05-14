@@ -110,7 +110,7 @@ void printStructers(Supply **sup, int rows)
             printf("Имя - %s, срок реализации - %.1f\n", sup[i]->name, sup[i]->deadline);
         }
     }
-
+    
     for(int i = 0; i < rows; i++)
     {
         free(sup[i]);

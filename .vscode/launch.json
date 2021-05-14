@@ -17,5 +17,12 @@
             "MIMode": "lldb",
             "preLaunchTask": "C/C++: gcc build active file"
         }
+    ],
+    "setupCommands": [ 
+        { 
+        "description": "Включить автоматическое форматирование для gdb", 
+        "text": "-enable-pretty-printing", 
+        "ignoreFailures": true 
+        }
     ]
 }

@@ -5,11 +5,12 @@
 // TODO: Матрица смежности -> Матрица инцендентности
 
 int volumeOfElements();
-void createNewMatrix();
+void createNewMatrix(int volumeOfStrings, int rebra);
 int readFileAndPrintMatrix();
 
 int main()
 {
+    system("chcp 1251");
     int volumeOfStrings = readFileAndPrintMatrix();
     int rebra = volumeOfElements();
 
@@ -69,30 +70,28 @@ void createNewMatrix(int volumeOfStrings, int rebra)
         return ;
     }
 
-    newMatrix = (int **)malloc(volumeOfStrings * sizeof(int*));
-    for (int i = 0; i < rebra; i++)
-    {
-        newMatrix[i] = (int *)malloc(volumeOfStrings * sizeof(int));
-    }
-
-    fseek(file, 0, SEEK_SET);
-
-    //Основная часть алгоритма
+    newMatrix = (int **)calloc(volumeOfStrings, sizeof(int *));
     for (int i = 0; i < volumeOfStrings; i++)
     {
-        // Костыль, придуманный в полвторого ночи :)
-        for (int k = 0; k < i; k++)
+        newMatrix[i] = (int *)calloc(rebra, sizeof(int));
+    }
+
+    // Основная часть алгоритма
+    for (int j = 0; j < rebra; j++)
+    {
+        
+        for (int k = 0; k < j; k++)
         {
             fscanf(file, "%d", &temp);
         }
         
-        for (int j = i; j < volumeOfStrings; j++)
+        for (int i = j; i < volumeOfStrings; i++)
         {   
             fscanf(file, "%d", &temp);
             if (temp == 1)
             { 
-                newMatrix[temp_k][i] = 1;
-                newMatrix[temp_k][j] = 1;
+                newMatrix[i][temp_k] = 1;
+                newMatrix[j][temp_k] = 1;
                 temp_k++;
             }
         }
@@ -100,9 +99,9 @@ void createNewMatrix(int volumeOfStrings, int rebra)
     fclose(file);
 
     printf("Матрица инцендентности: \n");
-    for (int i = 0; i < rebra; i++)
+    for (int i = 0; i < volumeOfStrings; i++)
     {
-        for (int j = 0; j < volumeOfStrings; j++)
+        for (int j = 0; j < rebra; j++)
         {
             printf("%3d", newMatrix[i][j]);
         }
