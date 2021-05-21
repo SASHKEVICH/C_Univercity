@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-// TODO: Создание BST-дерева методом вставки в лист не рекурсивно. Прямой обход.
+// TODO: РЎРѕР·РґР°РЅРёРµ BST-РґРµСЂРµРІР° РјРµС‚РѕРґРѕРј РІСЃС‚Р°РІРєРё РІ Р»РёСЃС‚ РЅРµ СЂРµРєСѓСЂСЃРёРІРЅРѕ. РџСЂСЏРјРѕР№ РѕР±С…РѕРґ.
 
 typedef struct node
 {
@@ -11,6 +11,8 @@ typedef struct node
     int data;
 } bstNode;
 
+void print2DUtil(bstNode *root, int space);
+void print2D(bstNode **root);
 void createArray(int* array, int arrayLen);
 void printArray(int* array, int arrayLen);
 void insertBstNode(bstNode** root, int key);
@@ -23,25 +25,53 @@ int main()
     system("chcp 1251");
 
     int arrayLen;
-    printf("Количество элементов в дереве: ");
+    printf("РљРѕР»РёС‡РµСЃС‚РІРѕ СЌР»РµРјРµРЅС‚РѕРІ РІ РґРµСЂРµРІРµ: ");
     scanf("%d", &arrayLen);
 
     int* array = (int *)malloc(sizeof(int) * arrayLen);
-    bstNode** root = (bstNode **)malloc(sizeof(bstNode*)); // BST-дерево
+    bstNode** root = (bstNode **)malloc(sizeof(bstNode*)); // BST-РґРµСЂРµРІРѕ
+    *root = NULL;
 
     createArray(array, arrayLen);
-    printf("Исходная последовательность: \n");
+    printf("РСЃС…РѕРґРЅР°СЏ РїРѕСЃР»РµРґРѕРІР°С‚РµР»СЊРЅРѕСЃС‚СЊ: \n");
     printArray(array, arrayLen);
-    printf("\nПрямой обход дерева: \n");
+    printf("\nРџСЂСЏРјРѕР№ РѕР±С…РѕРґ РґРµСЂРµРІР°: \n");
     createBst(root, array, arrayLen);
     directApproach(root);
+    printf("\nРџРѕСЃС‚СЂРѕРµРЅРЅРѕРµ РґРµСЂРµРІРѕ: \n");
+    print2D(root);
 
-    printf("Выполнил Бекренев Александр, 420-4.");
+    printf("Р’С‹РїРѕР»РЅРёР» Р‘РµРєСЂРµРЅРµРІ РђР»РµРєСЃР°РЅРґСЂ, 420-4.");
 
     return 0;
 }
 
-// Создание массива
+void print2DUtil(bstNode *root, int space)
+{
+    if(root == NULL) return;
+  
+    space += 7;
+  
+    print2DUtil(root->right, space);
+
+    printf("\n");
+    for (int i = 7; i < space; i++)
+    {
+        printf(" ");
+    }
+    printf("%d\n", root->data);
+  
+    print2DUtil(root->left, space);
+}
+
+// Р’С‹РІРѕРґ BST-РґРµСЂРµРІР° РІ РєРѕРЅСЃРѕР»СЊ 
+void print2D(bstNode **root)
+{
+   print2DUtil((*root), 0);
+}
+
+
+// РЎРѕР·РґР°РЅРёРµ РјР°СЃСЃРёРІР°
 void createArray(int* array, int arrayLen)
 {
     for(int i = 0; i < arrayLen; i++)
@@ -50,7 +80,7 @@ void createArray(int* array, int arrayLen)
     }
 }
 
-// Вывод массива в консоль
+// Р’С‹РІРѕРґ РјР°СЃСЃРёРІР° РІ РєРѕРЅСЃРѕР»СЊ
 void printArray(int* array, int arrayLen)
 {
     for(int i = 0; i < arrayLen; i++)
@@ -59,20 +89,19 @@ void printArray(int* array, int arrayLen)
     }
 }
 
-// Заполняю bst-дерево элементами массива
+// Р—Р°РїРѕР»РЅСЏСЋ bst-РґРµСЂРµРІРѕ СЌР»РµРјРµРЅС‚Р°РјРё РјР°СЃСЃРёРІР°
 void createBst(bstNode** root, int* array, int arrayLen)
 {
-
     for(int i = 0; i < arrayLen; i++)
     {
         insertBstNode(root, array[i]);
     }
 }
 
-// Вставка в лист
+// Р’СЃС‚Р°РІРєР° РІ Р»РёСЃС‚
 void insertBstNode(bstNode** root, int key)
 {
-    if(*root == NULL) // Пустой
+    if(*root == NULL) // РџСѓСЃС‚РѕР№
     {
         *root = (bstNode *)malloc(sizeof(bstNode));
         (*root)->left = NULL;
@@ -87,7 +116,7 @@ void insertBstNode(bstNode** root, int key)
         {
             if(key >= temp->data)
             {
-                if(!temp->right) // Пустой
+                if(!temp->right) // РџСѓСЃС‚РѕР№
                 {
                     temp->right = (bstNode *)malloc(sizeof(bstNode));
                     temp->right->left = NULL;
@@ -102,7 +131,7 @@ void insertBstNode(bstNode** root, int key)
             }
             else
             {
-                if(!temp->left) // Пустой
+                if(!temp->left) // РџСѓСЃС‚РѕР№
                 {
                     temp->left = (bstNode *)malloc(sizeof(bstNode));
                     temp->left->left = NULL;
@@ -120,7 +149,7 @@ void insertBstNode(bstNode** root, int key)
 }
 
 
-// Функция выполняющая прямой обход
+// Р¤СѓРЅРєС†РёСЏ РІС‹РїРѕР»РЅСЏСЋС‰Р°СЏ РїСЂСЏРјРѕР№ РѕР±С…РѕРґ
 void directApproach(bstNode** root)
 {
     bstNode* temp = *root;
