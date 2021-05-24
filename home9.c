@@ -16,7 +16,7 @@ int main()
     int *array = (int *)calloc(sizeof(int), length + 1);
 
 
-    printf("Создать множество от 0 до n (1) или произвольное (2)?\n");
+    printf("Создать множество от 1 до n (1) или произвольное (2)?\n");
     printf("Введите 1 или 2:\n");
     int choice;
     scanf("%d", &choice);
