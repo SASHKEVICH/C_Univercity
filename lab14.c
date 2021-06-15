@@ -42,7 +42,6 @@ int main()
     scanf("%d", &length);
 
     int *array = (int *)malloc(sizeof(int) * length);
-    // int array[7] = {3, 11, 4, 4, 3, 9, 11};
     bstNode **inRoot = (bstNode **)malloc(sizeof(bstNode *));
     bstNode **inLeaf = (bstNode **)malloc(sizeof(bstNode *));
     *inRoot = NULL; // Иначе не работает. Почему-то корень дерева автоматически не пустой.
@@ -56,9 +55,9 @@ int main()
     printf("BST-Дерево со вставкой элементов в корень: \n");
     print2D(inRoot);
 
-    // createBSTInLeaf(inLeaf, array, length);
-    // printf("BST-Дерево со вставкой элементов в лист: \n");
-    // print2D(inLeaf);
+    createBSTInLeaf(inLeaf, array, length);
+    printf("BST-Дерево со вставкой элементов в лист: \n");
+    print2D(inLeaf);
 
     int elementToDelete = 11;
     printf("Какой элемент вы хотели бы удалить? ");
@@ -67,8 +66,8 @@ int main()
     printf("Дерево с после удаления элемента '%d': \n", elementToDelete);
     print2D(inRoot);
 
-    // free(array);
-    // free(inLeaf);
+    free(array);
+    free(inLeaf);
     free(inRoot);
     
     printf("Работу выполнил Бекренев Александр. 420-4 группа.");

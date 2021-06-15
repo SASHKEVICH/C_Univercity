@@ -23,6 +23,7 @@ listNode *createNode(int setExpValue, int setMultipValue)
 
     return node;
 }
+
 // Функция ставит звено в конец
 void append(listNode **list, int setExpValue, int setMultipValue)
 {

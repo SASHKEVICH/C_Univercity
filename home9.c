@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-// TODO: Р“РµРЅРµСЂР°С†РёСЏ РїРµСЂРµСЃС‚Р°РЅРѕРІРѕРє СЃ РїРѕРјРѕС‰СЊСЋ РІР»РѕР¶РµРЅРЅС‹С… С†РёРєР»РѕРІ
+// TODO: Генерация перестановок с помощью вложенных циклов
 
 void createArray(int *array, int length);
 void printArray(int *array, int length);
@@ -11,13 +11,13 @@ void shift(int *array, int *tempArray, int length, int lastIndex);
 int main()
 {
     int length;
-    printf("Р”Р»РёРЅР° РјР°СЃСЃРёРІР°: ");
+    printf("Длина массива: ");
     scanf("%d", &length);
     int *array = (int *)calloc(sizeof(int), length + 1);
 
 
-    printf("РЎРѕР·РґР°С‚СЊ РјРЅРѕР¶РµСЃС‚РІРѕ РѕС‚ 1 РґРѕ n (1) РёР»Рё РїСЂРѕРёР·РІРѕР»СЊРЅРѕРµ (2)?\n");
-    printf("Р’РІРµРґРёС‚Рµ 1 РёР»Рё 2:\n");
+    printf("Создать множество от 1 до n (1) или произвольное (2)?\n");
+    printf("Введите 1 или 2:\n");
     int choice;
     scanf("%d", &choice);
     if(choice == 1)
@@ -26,7 +26,7 @@ int main()
     }
     else 
     {
-        printf("РњРЅРѕР¶РµСЃС‚РІРѕ: \n");
+        printf("Множество: \n");
         for(int i = 1; i < length + 1; i++)
         {   
             int temp;
@@ -36,16 +36,16 @@ int main()
     }
 
     printf("--------------------\n");
-    printf("РџРµСЂРµСЃС‚Р°РЅРѕРІРєРё:\n");
+    printf("Перестановки:\n");
 
     int per = permutation(array, length);
-    printf("РџРµСЂРµСЃС‚Р°РЅРѕРІРѕРє - %d", per);
+    printf("Перестановок - %d", per);
     free(array);
 
     return 0;
 }
 
-// Р—Р°РїРѕР»РЅРµРЅРёРµ РјР°СЃСЃРёРІР° СЌР»РµРјРµРЅС‚Р°РјРё РѕС‚ 1 РґРѕ n
+// Заполнение массива элементами от 1 до n
 void createArray(int *array, int length)
 {
     for(int i = 1; i < length + 1; i++)
@@ -86,7 +86,7 @@ int permutation(int *array, int length)
     return per;
 }
 
-// РђР»РіРѕСЂРёС‚Рј РїРµСЂРµСЃС‚Р°РЅРѕРІРєРё
+// Алгоритм перестановки
 void shift(int *array, int *tempArray, int length, int lastIndex)
 {
 
